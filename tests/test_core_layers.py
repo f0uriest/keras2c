@@ -12,7 +12,6 @@ import subprocess
 import time
 import os
 import tensorflow as tf
-tf.compat.v1.disable_eager_execution()
 
 __author__ = "Rory Conlin"
 __copyright__ = "Copyright 2020, Rory Conlin"
@@ -22,7 +21,7 @@ __email__ = "wconlin@princeton.edu"
 
 
 CC = 'gcc'
-
+seed = 100
 
 def build_and_run(name, return_output=False):
 
@@ -153,7 +152,7 @@ class TestNormalization(unittest.TestCase):
     def test_BatchNorm1(self):
         inshp = (10, 11, 12)
         axis = 3
-        init = keras.initializers.RandomUniform(minval=0.1, maxval=1.0)
+        init = keras.initializers.RandomUniform(minval=0.1, maxval=1.0, seed=seed)
         a = keras.layers.Input(inshp)
         b = keras.layers.BatchNormalization(axis=axis,
                                             beta_initializer=init,
@@ -170,7 +169,7 @@ class TestNormalization(unittest.TestCase):
     def test_BatchNorm2(self):
         inshp = (10, 11, 12)
         axis = 2
-        init = keras.initializers.RandomUniform(minval=0.1, maxval=1.0)
+        init = keras.initializers.RandomUniform(minval=0.1, maxval=1.0, seed=seed)
         a = keras.layers.Input(inshp)
         b = keras.layers.BatchNormalization(axis=axis,
                                             beta_initializer=init,
@@ -187,7 +186,7 @@ class TestNormalization(unittest.TestCase):
     def test_BatchNorm3(self):
         inshp = (10, 11, 12, 13)
         axis = 1
-        init = keras.initializers.RandomUniform(minval=0.1, maxval=1.0)
+        init = keras.initializers.RandomUniform(minval=0.1, maxval=1.0, seed=seed)
         a = keras.layers.Input(inshp)
         b = keras.layers.BatchNormalization(axis=axis,
                                             beta_initializer=init,
@@ -204,7 +203,7 @@ class TestNormalization(unittest.TestCase):
     def test_BatchNorm4(self):
         inshp = (10, 11, 12)
         axis = 2
-        init = keras.initializers.RandomUniform(minval=0.1, maxval=2.0)
+        init = keras.initializers.RandomUniform(minval=0.1, maxval=2.0, seed=seed)
         a = keras.layers.Input(inshp)
         b = keras.layers.BatchNormalization(axis=axis,
                                             beta_initializer=init,
